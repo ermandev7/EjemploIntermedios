@@ -1,0 +1,75 @@
+﻿@page "/counter"
+
+<h1 class="text-center mt-4">Sobre carga de metodos</h1>
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col">
+            <label for="firstNumber" class="form-label">Primer Número:</label>
+            <input type="text" id="firstNumber" class="form-control" step="any" @bind="firstNumber" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <label for="secondNumber" class="form-label">Segundo Número:</label>
+            <input type="text" id="secondNumber" class="form-control" step="any" @bind="secondNumber" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <button class="btn btn-primary w-100" @onclick="CalculateSum">Sumar</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p role="status" class="alert alert-info text-center">Resultado de la suma: @sumResult</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string firstNumber = "0";
+    private string secondNumber = "0";
+    private string sumResult = "0";
+
+    private void CalculateSum()
+    {
+        // Eliminar espacios en blanco y asegurar compatibilidad con punto y coma decimal
+        firstNumber = firstNumber.Replace(",", ".");
+        secondNumber = secondNumber.Replace(",", ".");
+
+        // Intentar convertir las entradas a double
+        if (double.TryParse(firstNumber, System.Globalization.NumberStyles.Any,
+            System.Globalization.CultureInfo.InvariantCulture, out double doubleFirst) &&
+            double.TryParse(secondNumber, System.Globalization.NumberStyles.Any,
+            System.Globalization.CultureInfo.InvariantCulture, out double doubleSecond))
+        {
+            // Sumar como double y formatear el resultado
+            sumResult = SumNumbers(doubleFirst, doubleSecond)
+                .ToString("F2", System.Globalization.CultureInfo.InvariantCulture);
+        }
+        // Intentar convertir las entradas a int
+        else if (int.TryParse(firstNumber, out int intFirst) &&
+                 int.TryParse(secondNumber, out int intSecond))
+        {
+            // Sumar como int y convertir el resultado a cadena
+            sumResult = SumNumbers(intFirst, intSecond).ToString();
+        }
+        else
+        {
+          
+            // Manejar entrada inválida
+            sumResult = "Entrada inválida";
+        }
+    }
+
+    private int SumNumbers(int a, int b)
+    {
+        return a + b;
+    }
+
+    private double SumNumbers(double a, double b)
+    {
+        return a + b;
+    }
+}

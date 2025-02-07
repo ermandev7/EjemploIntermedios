@@ -1,0 +1,49 @@
+﻿@page "/emcapsulamiento"
+@using EjemploIntermedios.Components.Clases
+<h1 class="text-center mt-4">Emcapsulamiento</h1>
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col">
+            <label for="saldo" class="form-label">saldo:</label>
+            <input type="text" id="saldo" class="form-control" step="any" @bind="saldo" />
+        </div>
+    </div>
+    @*   <div class="row mb-3">
+        <div class="col">
+            <label for="secondNumber" class="form-label">Segundo Número:</label>
+            <input type="text" id="secondNumber" class="form-control" step="any" @bind="secondNumber" />
+        </div>
+    </div> *@
+    <div class="row mb-3">
+        <div class="col">
+            <button class="btn btn-primary w-100" @onclick="MostarDatos">Mostrar</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p role="status" class="alert alert-info text-center">Resultado de la suma: @Result</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    private double saldo;
+    // private string secondNumber = "0";
+    private string Result = "";
+    CuentaBancaria cuentaBancaria = new CuentaBancaria();
+    private void CargarDatos()
+    {
+        cuentaBancaria.Saldo = ( saldo);
+
+    }
+
+    private void MostarDatos()
+    {
+
+        CargarDatos();
+        Result = cuentaBancaria.Saldo.ToString();
+    }
+
+    
+}
