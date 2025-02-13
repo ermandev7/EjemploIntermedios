@@ -83,3 +83,5 @@ Este proyecto abarca los siguientes conceptos intermedios:
 
 9. **Eventos**: Cómo definir y manejar eventos en la programación.
 
+## Licencia
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para más información.
