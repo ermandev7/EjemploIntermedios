@@ -24,16 +24,9 @@ Este repositorio contiene ejemplos intermedios de programación en **C#**, dise�
     cd EjemploIntermedios
     ```
 
-3. Instala las dependencias necesarias:
-
-    ```bash
-    # Aquí puedes especificar las dependencias y los comandos necesarios para instalarlas, por ejemplo:
-    pip install -r requirements.txt
-    ```
-
 ## Uso
 
-Describe aquí cómo utilizar tu proyecto. Incluye ejemplos de código y capturas de pantalla si es necesario.
+Este proyecto está construido con .NET MAUI Blazor utilizando el lenguaje de programación C#. Contiene ejemplos de código que son esenciales para adquirir un conocimiento intermedio en programación. Estos ejemplos abarcan una variedad de conceptos clave que ayudarán a los desarrolladores a mejorar sus habilidades y a profundizar en su comprensión de la programación en C#.
 
 ## Ejemplo de Código
 
