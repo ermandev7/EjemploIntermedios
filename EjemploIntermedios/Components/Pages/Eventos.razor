@@ -1,14 +1,19 @@
 ﻿
 
-@page "/interfaces"
+@page "/eventos"
 @using EjemploIntermedios.Components.Clases
 
-<h1 class="text-center mt-4">Interfaces</h1>
+<h3>Delegados y Eventos</h3>
+
+
 
 <div class="container mt-4">
     <div class="row mb-3">
         <div class="col">
-            <button class="btn btn-primary w-100" @onclick="MostrarMensajes">Mostrar Mensajes</button>
+            <button class="btn btn-primary w-100" @onclick="ArrancarMotor">Ararncar</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-primary w-100" @onclick="DetenerMotor">Detener</button>
         </div>
     </div>
 
@@ -24,16 +29,27 @@
     </div>
 </div>
 
-@code {
 
+@code {
     private string MensajeCocheArrancado = "";
     private string MensajeCocheDetenido = "";
+    private Coche coche;
 
-    private void MostrarMensajes()
+    protected override void OnInitialized()
     {
-        IVehiculo coche = new Coche();
+        coche = new Coche();
 
+        coche.MotorArrancado += () => MensajeCocheArrancado = "";
+        coche.MotorDetenido += () => MensajeCocheDetenido = "";
+    }
+
+    private void ArrancarMotor()
+    {
         MensajeCocheArrancado = coche.ArrancarMotor();
+    }
+
+    private void DetenerMotor()
+    {
         MensajeCocheDetenido = coche.DetenerMotor();
     }
-} 
+}
