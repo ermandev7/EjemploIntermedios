@@ -1,0 +1,95 @@
+﻿@page "/diccionario"
+
+<h1 class="text-center mt-4">Diccionario </h1>
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col">
+            <input type="text" class="form-control" @bind="claveAgregar" placeholder="Clave a agregar" />
+            <input type="number" class="form-control mt-2" @bind="valorAgregar" placeholder="Valor a agregar" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <button class="btn btn-primary w-100" @onclick="agregarElementoDiccionario">Agregar Elemento al Diccionario</button>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <input type="text" class="form-control" @bind="claveEliminar" placeholder="Clave a eliminar" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <button class="btn btn-primary w-100" @onclick="eliminarElementoDiccionario">Eliminar Elemento del Diccionario</button>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <button class="btn btn-primary w-100" @onclick="mostrarTodosLosElementos">Mostrar Todos los Elementos</button>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <p role="status" class="alert alert-info text-center">@mensajeDiccionario</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    private Dictionary<string, int> edades;
+    private string mensajeDiccionario = "";
+    private string claveAgregar;
+    private int valorAgregar;
+    private string claveEliminar;
+
+    protected override void OnInitialized()
+    {
+        // Inicializar el diccionario aquí
+        edades = new Dictionary<string, int>
+        {
+            { "Alice", 30 },
+            { "Bob", 25 }
+        };
+        edades["Charlie"] = 35;
+    }
+
+    private void mostrarTodosLosElementos()
+    {
+        // Mostrar todos los elementos del diccionario
+        mensajeDiccionario = $"Diccionario: {string.Join(", ", edades.Select(e => $"{e.Key} - {e.Value}"))}";
+    }
+
+    private void agregarElementoDiccionario()
+    {
+        // Agregar un nuevo elemento al diccionario
+        if (!string.IsNullOrWhiteSpace(claveAgregar) && !edades.ContainsKey(claveAgregar))
+        {
+            edades.Add(claveAgregar, valorAgregar);
+            mensajeDiccionario = $"Elemento añadido: {claveAgregar} - {valorAgregar}";
+        }
+        else
+        {
+            mensajeDiccionario = $"La clave '{claveAgregar}' ya existe o es inválida.";
+        }
+    }
+
+    private void eliminarElementoDiccionario()
+    {
+        // Eliminar el elemento con la clave especificada del diccionario
+        if (edades.ContainsKey(claveEliminar))
+        {
+            edades.Remove(claveEliminar);
+            mensajeDiccionario = $"Elemento con la clave '{claveEliminar}' eliminado.";
+        }
+        else
+        {
+            mensajeDiccionario = $"La clave '{claveEliminar}' no se encuentra.";
+        }
+    }
+}
